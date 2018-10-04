@@ -1,11 +1,12 @@
 // PLEASE DON'T change function name
 module.exports = function makeExchange(currency) {
-  if(currency <= 0){
-    return {};
-  } else if(currency <= 10000){
-    let monetDenomination = [50, 25, 10, 5, 1];
-    let monetName = ["H", "Q", "D", "N", "P"];
-    let result = {};
+  const result = {};
+
+  if(currency > 10000){
+    return {error: "You are rich, my friend! We don't have so much coins for exchange"};
+  } else {
+    const monetDenomination = [50, 25, 10, 5, 1];
+    const monetName = ["H", "Q", "D", "N", "P"];
 
     for(let i = 0, len = monetDenomination.length; i < len; i++){
       if(currency >= monetDenomination[i]){
@@ -17,9 +18,7 @@ module.exports = function makeExchange(currency) {
         result[monetName[i]] = count;
       }
     }
-
-    return result;
-  } else {
-    return {error: "You are rich, my friend! We don't have so much coins for exchange"};
   }
+
+  return result;
 }
